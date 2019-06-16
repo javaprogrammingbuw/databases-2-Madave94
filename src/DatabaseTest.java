@@ -143,6 +143,32 @@ public class DatabaseTest {
 		}
 		rs.close();
 				
+		prep = connection.prepareStatement(
+				"INSERT into friends VALUES(?,?)");
+				prep.setString(1, "madave");
+				prep.setString(2, "moleop");
+				prep.addBatch();
+				prep.setString(1, "madave");
+				prep.setString(2, "tornupto100");
+				prep.addBatch();
+				prep.setString(1, "madave");
+				prep.setString(2, "hocklebock");
+				prep.addBatch();
+				prep.setString(1, "tornupto100");
+				prep.setString(2, "hocklebock");
+				prep.addBatch();
+				prep.setString(1, "tornupto100");
+				prep.setString(2, "moleop");
+				prep.executeBatch();
+				connection.commit();
+				
+		rs = stat.executeQuery("SELECT message from status where user_nick in ("
+				+ "select userB from friends where userA = 'madave')"
+				+ "ORDER BY ID DESC limit 3");
+		while(rs.next()){
+			System.out.println("Message = " + rs.getString("Message"));
+		}
+		rs.close();
 		
 		connection.close();
 	}

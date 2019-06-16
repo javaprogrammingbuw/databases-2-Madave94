@@ -1,0 +1,271 @@
+CREATE TABLE users(
+Nickname TEXT PRIMARY KEY,
+EMail TEXT,
+Password INTEGER
+);
+
+CREATE TABLE status(
+  ID INTEGER NOT NULL,
+  Message TExt,
+  user_nick text,
+  Primary key(ID),
+  foreign key(user_nick) references users(Nickname)
+  ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+CREATE table friends(
+  userA text not null,
+  userB text not NULL,
+  Primary key (userA, userB),
+  Foreign key(userA) references users(nickname)
+  ON DELETE CASCADE ON UPDATE NO ACTION
+  foreign key(userB) references users(nickname)
+  ON DELETE CASCADE ON UPDATE NO ACTION
+);
+
+insert into users(
+  Nickname,
+  EMail,
+  Password
+  )
+  VALues (
+    "madave",
+    "david.tschirschwitz@online.de",
+    12345678
+    );
+
+insert into users(
+  Nickname,
+  EMail,
+  Password
+  )
+  VALues (
+    'moleop',
+    "moritz.preuß@aol.de",
+    0000000
+    );
+
+insert into users(
+  Nickname,
+  EMail,
+  Password
+  )
+  VALues (
+    'tornupto100',
+    "thomas.strezeletz@dingbums.de",
+    0100805
+    );
+
+insert into users(
+  Nickname,
+  EMail,
+  Password
+  )
+  VALues (
+    'hocklebock',
+    "jan.froehlich@gmail.de",
+    371402147
+    );
+
+insert into users(
+  Nickname,
+  EMail,
+  Password
+  )
+  VALues (
+    'pikachu',
+    "pokemaster@alabasta.de",
+    150
+    );
+
+Select nickname
+from USERS
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    1,
+    "One does not simply walk into mordor",
+    "hocklebock" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    2,
+    "What is love?",
+    "hocklebock" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    3,
+    "I like SQL.",
+    "hocklebock" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    4,
+    "my 4th status",
+    "hocklebock" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    10,
+    "the last status i will send",
+    "hocklebock" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    5,
+    "i made this database",
+    "madave" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    6,
+    "biking is fun",
+    "madave" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    7,
+    "hee, fliendo, how does this work?",
+    "tornupto100" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    8,
+    "oh no, did i break it?",
+    "tornupto100" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+    9,
+    "hallo, ich bau langsam datenbanken, auf deutsch.",
+    "moleop" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+   	11,
+    "Bergsteigeralgorithmus",
+    "moleop" 
+    );
+
+insert into status(
+  ID,
+  Message,
+  user_nick
+  )
+  values(
+   	12,
+    "pika,pika",
+    "pikachu" 
+    );
+
+select *
+from status
+where user_nick == "hocklebock"
+
+insert into friends(
+  userA,
+  userB
+  )
+  values(
+    "madave",
+    "moleop"
+    );
+
+insert into friends(
+  userA,
+  userB
+  )
+  values (
+    "madave",
+    "tornupto100"
+    );
+
+insert into friends(
+  userA,
+  userB
+  )
+  values (
+    "madave",
+    "hocklebock"
+    );
+
+insert into friends(
+  userA,
+  userB
+  )
+  values (
+    "tornupt100",
+    "hocklebock"
+    );
+
+insert into friends(
+  userA,
+  userB
+  )
+  values (
+    "tornupt100",
+    "moleop"
+    );
+
+select Message
+from status
+Where user_nick in (select userB
+from friends
+where userA = "madave")
+ORDER BY ID DESC
+limit 3
